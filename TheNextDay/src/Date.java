@@ -31,7 +31,10 @@ public class Date {
 		today.year = Integer.parseInt(dmy[2]);
 		
 		System.out.println("today: "+today.date+" "+today.month+" "+today.year);
-		System.out.println("next day:"+today.nextDay().date+" "+today.nextDay().month+" "+today.nextDay().year);
+		if(today.isValid()){
+			Date nextDay = today.nextDay();
+			System.out.println("next day:"+nextDay.date+" "+nextDay.month+" "+nextDay.year);
+		}else System.out.println("Date is invalid");
 	}
 	Date nextDay(){
 		int nDate= date,nMonth = month, nYear = year;
@@ -47,13 +50,20 @@ public class Date {
 					nDate++;
 				}
 			}
-			else if(nMonth == 1||nMonth == 3||nMonth == 5||nMonth == 7||nMonth == 8||nMonth == 10||nMonth == 12){
+			else if(nMonth == 1||nMonth == 3||nMonth == 5||nMonth == 7||nMonth == 8||nMonth == 10){
 				if(nDate==31){
 					nDate=1;
 					nMonth++;
 				}
 				else{
 					nDate++;
+				}
+			}
+			else if(nMonth==12){
+				if(nDate==31){
+					nDate=1;
+					nMonth=1;
+					nYear++;
 				}
 			}
 			else{
@@ -66,7 +76,7 @@ public class Date {
 			}
 		}
 		else{
-			if(nMonth == 1||nMonth == 3||nMonth == 5||nMonth == 7||nMonth == 8||nMonth == 10||nMonth == 12){
+			if(nMonth == 1||nMonth == 3||nMonth == 5||nMonth == 7||nMonth == 8||nMonth == 10){
 				if(nDate==31){
 					nDate = 1;
 					nMonth++;
@@ -82,6 +92,13 @@ public class Date {
 					nDate++;
 				}
 			}
+			else if(nMonth==12){
+				if(nDate==31){
+					nDate=1;
+					nMonth=1;
+					nYear++;
+				}
+			}
 			else{
 				if(nDate==30){
 					nDate=1;
@@ -95,7 +112,38 @@ public class Date {
 		Date nextDay = new Date(nDate,nMonth,nYear);
 		return nextDay;
 	}
-	boolean isLeapYear(){
+	
+	private boolean isValid(){
+		if(isLeapYear()){
+			switch(month){
+				case 1: case 3:	case 5:	case 7:	case 8:	case 10:case 12:
+					if(date>=1 && date <=31) return true;
+					else return false;
+				case 2:
+					if(date>=1 && date <= 29) return true;
+					else return false;
+				case 4: case 6: case 9: case 11:
+					if(date>=1 && date <=30) return true;
+					else return false;
+				default: return false;
+			}
+		}
+		else{
+			switch(month){
+			case 1: case 3:	case 5:	case 7:	case 8:	case 10:case 12:
+				if(date>=1 && date <=31) return true;
+				else return false;
+			case 2:
+				if(date>=1 && date <= 28) return true;
+				else return false;
+			case 4: case 6: case 9: case 11:
+				if(date>=1 && date <=30) return true;
+				else return false;
+			default: return false;
+			}
+		}
+	}
+	private boolean isLeapYear(){
 		if(year %4 ==0){
 			if(year %100 == 0 ){
 				if(year %400 ==0)	return true;
