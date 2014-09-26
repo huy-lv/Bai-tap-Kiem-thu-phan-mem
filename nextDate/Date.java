@@ -1,18 +1,19 @@
+package nextDate;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Date {
-	int date, month, year;
+	int day, month, year;
 
 	Date() {
-		this.date = 0;
+		this.day = 0;
 		this.month = 0;
 		this.year = 0;
 	}
 
-	Date(int _date, int _month, int _year) {
-		date = _date;
+	Date(int _day, int _month, int _year) {
+		day = _day;
 		month = _month;
 		year = _year;
 	}
@@ -29,32 +30,32 @@ public class Date {
 			System.out.println("Error!");
 		}
 		String[] dmy = input.split(" ");
-		today.date = Integer.parseInt(dmy[0]);
+		today.day = Integer.parseInt(dmy[0]);
 		today.month = Integer.parseInt(dmy[1]);
 		today.year = Integer.parseInt(dmy[2]);
 
-		System.out.println("today: " + today.date + " " + today.month + " "
+		System.out.println("today: " + today.day + " " + today.month + " "
 				+ today.year);
 		if (today.isValid()) {
 			Date nextDay = today.nextDay();
-			System.out.println("next day:" + nextDay.date + " " + nextDay.month
+			System.out.println("next day:" + nextDay.day + " " + nextDay.month
 					+ " " + nextDay.year);
 		} else
 			System.out.println("Date is invalid");
 	}
 
 	Date nextDay() {
-		int nDate = date, nMonth = month, nYear = year;
+		int nDay = day, nMonth = month, nYear = year;
 		if (isLeapYear()) {
 			switch (nMonth) {
 			case 2:
-				if (nDate == 28) {
-					nDate++;
-				} else if (nDate == 29) {
-					nDate = 1;
+				if (nDay == 28) {
+					nDay++;
+				} else if (nDay == 29) {
+					nDay = 1;
 					nMonth++;
 				} else {
-					nDate++;
+					nDay++;
 				}
 				break;
 			case 1:
@@ -63,26 +64,26 @@ public class Date {
 			case 7:
 			case 8:
 			case 10:
-				if (nDate == 31) {
-					nDate = 1;
+				if (nDay == 31) {
+					nDay = 1;
 					nMonth++;
 				} else {
-					nDate++;
+					nDay++;
 				}
 				break;
 			case 12:
-				if (nDate == 31) {
-					nDate = 1;
+				if (nDay == 31) {
+					nDay = 1;
 					nMonth = 1;
 					nYear++;
 				}
 				break;
 			default:
-				if (nDate == 30) {
-					nDate = 1;
+				if (nDay == 30) {
+					nDay = 1;
 					nMonth++;
 				} else {
-					nDate++;
+					nDay++;
 				}
 				break;
 			}
@@ -94,38 +95,38 @@ public class Date {
 			case 7:
 			case 8:
 			case 10:
-				if (nDate == 31) {
-					nDate = 1;
+				if (nDay == 31) {
+					nDay = 1;
 					nMonth++;
 				} else {
-					nDate++;
+					nDay++;
 				}
 				break;
 			case 2:
-				if (nDate == 28) {
-					nDate = 1;
+				if (nDay == 28) {
+					nDay = 1;
 					nMonth++;
 				} else {
-					nDate++;
+					nDay++;
 				}
 				break;
 			case 12:
-				if (nDate == 31) {
-					nDate = 1;
+				if (nDay == 31) {
+					nDay = 1;
 					nMonth = 1;
 					nYear++;
 				}
 			default:
-				if (nDate == 30) {
-					nDate = 1;
+				if (nDay == 30) {
+					nDay = 1;
 					nMonth++;
 				} else {
-					nDate++;
+					nDay++;
 				}
 			}
 
 		}
-		Date nextDay = new Date(nDate, nMonth, nYear);
+		Date nextDay = new Date(nDay, nMonth, nYear);
 		return nextDay;
 	}
 
@@ -139,12 +140,12 @@ public class Date {
 			case 8:
 			case 10:
 			case 12:
-				if (date >= 1 && date <= 31)
+				if (day >= 1 && day <= 31)
 					return true;
 				else
 					return false;
 			case 2:
-				if (date >= 1 && date <= 29)
+				if (day >= 1 && day <= 29)
 					return true;
 				else
 					return false;
@@ -152,7 +153,7 @@ public class Date {
 			case 6:
 			case 9:
 			case 11:
-				if (date >= 1 && date <= 30)
+				if (day >= 1 && day <= 30)
 					return true;
 				else
 					return false;
@@ -168,12 +169,12 @@ public class Date {
 			case 8:
 			case 10:
 			case 12:
-				if (date >= 1 && date <= 31)
+				if (day >= 1 && day <= 31)
 					return true;
 				else
 					return false;
 			case 2:
-				if (date >= 1 && date <= 28)
+				if (day >= 1 && day <= 28)
 					return true;
 				else
 					return false;
@@ -181,7 +182,7 @@ public class Date {
 			case 6:
 			case 9:
 			case 11:
-				if (date >= 1 && date <= 30)
+				if (day >= 1 && day <= 30)
 					return true;
 				else
 					return false;
@@ -206,7 +207,7 @@ public class Date {
 	}
 
 	String ToString() {
-		String a = date + " " + month + " " + year;
+		String a = day + " " + month + " " + year;
 		return a;
 	}
 }
